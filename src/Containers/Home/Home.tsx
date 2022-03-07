@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import Loading from 'components/Loading';
+import PostItem from 'components/PostItem';
 import { useQuery } from 'react-query';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface IData {
     data: IPost[];
@@ -26,14 +27,13 @@ function Home() {
         ['posts', pageId],
         () => fetchData(pageId),
         {
+            keepPreviousData: true,
             onError: (error: any) => {
                 const message = error?.response?.data?.message;
                 console.log({ message });
             },
         }
     );
-
-    console.log({ pagination: data?.meta.pagination.links.previous });
 
     return (
         <div className="Home">
@@ -57,20 +57,7 @@ function Home() {
                 </div>
                 {isLoading && <Loading />}
                 {data?.data?.map((post) => (
-                    <Link
-                        to={`/posts/${post.id}`}
-                        className="card mt-3 shadow-sm text-decoration-none"
-                        key={post.id}
-                    >
-                        <div className="card-body">
-                            <div className="d-flex justify-content-between mb-1">
-                                <span>Post Id: {post.id}</span>
-                                <span>User Id: {post.user_id}</span>
-                            </div>
-                            <h5 className="card-title"> {post.title} </h5>
-                            <p className="card-text">{post.body}</p>
-                        </div>
-                    </Link>
+                    <PostItem post={post} key={post.id} />
                 ))}
             </div>
         </div>

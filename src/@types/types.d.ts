@@ -4,7 +4,12 @@ interface IPost {
     title: string;
     body: string;
 }
-
+interface IUser {
+    name: string;
+    email: string;
+    gender: string;
+    status: 'active' | 'inactive';
+}
 interface IPagination {
     limit: number;
     links: {

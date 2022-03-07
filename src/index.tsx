@@ -1,10 +1,10 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './Containers/App';
-import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './containers/App';
+import './index.css';
+import reportWebVitals from './reportWebVitals';
 
 const queryClient = new QueryClient();
 
